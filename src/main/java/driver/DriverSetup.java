@@ -3,6 +3,7 @@ package driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import utils.PropertyReader;
 
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class DriverSetup {
             WebDriverManager.chromedriver().setup();
             DriverManager.setDriverThread(new ChromeDriver());
             DriverManager.getDriverThread().manage().window().maximize();
-            DriverManager.getDriverThread().get("https://www.google.com");
+            DriverManager.getDriverThread().get(PropertyReader.readProperty("url"));
         }
     }
 
