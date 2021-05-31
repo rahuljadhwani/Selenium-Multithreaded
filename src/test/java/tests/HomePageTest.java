@@ -1,7 +1,6 @@
 package tests;
 
-import driver.DriverManager;
-import driver.DriverSetup;
+import driver.DriverThreadManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
@@ -13,6 +12,6 @@ public final class HomePageTest extends TestBase{
     }
 
     @Test
-    public void testThree() { DriverManager.getDriverThread().findElement(By.name("q")).sendKeys("kolkata", Keys.ENTER);
+    public void testThree() { DriverThreadManager.getThreadSafeDriver().findElement(By.name("q")).sendKeys("kolkata", Keys.ENTER);
     }
 }
