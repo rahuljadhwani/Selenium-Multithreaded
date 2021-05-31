@@ -1,15 +1,16 @@
 package driver;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DriverManager {
+public class DriverThreadManager {
     static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
-    public static void setDriverThread(WebDriver driver){
+    public static void setThreadSafeDriver(WebDriver driver){
         threadLocal.set(driver);
     }
 
-    public static WebDriver getDriverThread(){
+    public static WebDriver getThreadSafeDriver(){
         return threadLocal.get();
     }
 

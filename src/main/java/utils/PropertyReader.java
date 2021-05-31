@@ -3,34 +3,49 @@ package utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 public class PropertyReader {
 
-    public static String readProperty(String key){
-        FileInputStream fileInputStream=null;
+    private static FileInputStream fileInputStream;
+    private static Properties properties;
+    private static final HashMap<String,String> configMap = new HashMap<>();
+
+    private PropertyReader(){
+
+    }
+
+    static {
         try {
             fileInputStream = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties");
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
-            System.out.println("config.properties file not found at the specified path");
+            System.err.println("config.properties file not found at the specified path");
         }
-        Properties properties = new Properties();
+        properties = new Properties();
         try {
             properties.load(fileInputStream);
         }catch (IOException i){
             i.printStackTrace();
-            System.out.println("file not found");
+            System.err.println("file not found");
         }
-        String value = properties.getProperty(key);
-        if (Objects.isNull(value)) {
+
+        for (Map.Entry<Object, Object> currentEntry:properties.entrySet()){
+            configMap.put(String.valueOf(currentEntry.getKey()),String.valueOf(currentEntry.getValue()));
+        }
+    }
+
+
+    public static String readProperty(String key){
+
+        String value = configMap.get(key);
+        if (Objects.isNull(key) || Objects.isNull(value)) {
             try {
                 throw new NullPointerException();
             }catch (NullPointerException n){
                 n.printStackTrace();
-                System.out.println("Invalid key:"+key+" specified");
+                System.err.println("Invalid key:"+key+" specified");
             }
         }return value;
     }
