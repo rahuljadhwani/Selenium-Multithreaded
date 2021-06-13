@@ -17,7 +17,7 @@ public class PropertyReader {
 
     static {
         try {
-            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties");
+            fileInputStream = new FileInputStream(FrameworkConstants.getConfigFilePath() );
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
