@@ -1,6 +1,7 @@
 package tests;
 
 import driver.DriverThreadManager;
+import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.OrangeHRMHomePage;
@@ -15,7 +16,9 @@ public class OrangeHRMLoginTest extends TestBase{
         String actualTitle = new OrangeHRMLoginPage().enterUsername("admin").enterPassword("admin123").clickOnLoginButton()
                 .clickOnWelcomeLink().clickOnLogout().getLoginPageTitle();
 
-        Assert.assertEquals(actualTitle,"OrangeHRM");
+        Assertions.assertThat(actualTitle)
+                .isNotNull()
+                .contains("OrangeHRM");
     }
 
 }
