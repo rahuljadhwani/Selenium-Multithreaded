@@ -19,6 +19,7 @@ public class OrangeHRMLoginTest extends TestBase{
         Assertions.assertThat(actualTitle)
                 .isNotNull()
                 .contains("OrangeHRM");
+
     }
 
 }

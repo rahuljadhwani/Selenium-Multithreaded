@@ -1,16 +1,18 @@
 package pages;
 
 import driver.DriverThreadManager;
+import enums.WaitStrategy;
+import factories.ExplicitWaitFactory;
 import org.openqa.selenium.By;
 
 public class CommonPageActions {
 
-    protected void clickOnElement(By by){
-        DriverThreadManager.getThreadSafeDriver().findElement(by).click();
+    protected void clickOnElement(By by, WaitStrategy waitStrategy){
+        ExplicitWaitFactory.performExplicitWait(waitStrategy,by).click();
     }
 
-    protected void sendKeysOnElement(By by, String keysToSend){
-        DriverThreadManager.getThreadSafeDriver().findElement(by).sendKeys(keysToSend);
+    protected void sendKeysOnElement(By by, WaitStrategy waitStrategy, String keysToSend){
+        ExplicitWaitFactory.performExplicitWait(waitStrategy,by).sendKeys(keysToSend);
     }
 
     protected String getPageTitle(){
